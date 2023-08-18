@@ -58,7 +58,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="max-w-[1200px] mx-auto mt-5 px-5 xl:px-0">
+    <main className="mt-5 px-5 xl:px-0">
       <NextEvent />
       <section className="grid md:flex my-5 gap-5 md:gap-10">
         <aside>
