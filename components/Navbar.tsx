@@ -5,20 +5,16 @@ import Link from "next/link";
 
 import {Input} from "@/components/ui/input";
 import {cn} from "@/lib/utils";
-import {Icons} from "@/components/icons";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
 export function Navbar() {
   return (
-    <NavigationMenu className="py-4 px-10 border-b-[3px] mb-10 gap-3 md:gap-10 justify-between max-w-full ">
+    <NavigationMenu className="py-4 px-10 border-b-[3px] mb-2 gap-3 md:gap-10 justify-between max-w-full ">
       <NavigationMenuList className="gap-10">
         <Link legacyBehavior passHref href="/">
           <h1 className="font-bold cursor-pointer">EventsCalendar</h1>

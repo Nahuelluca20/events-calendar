@@ -3,13 +3,16 @@
 import {useTheme} from "next-themes";
 
 import {Button} from "@/components/ui/button";
-import {Navbar} from "@/components/Navbar";
+import NextEvent from "@/components/NextEvent";
 
 export default function Home() {
   const {setTheme} = useTheme();
 
   return (
     <main className="">
+      <div className="p-5">
+        <NextEvent />
+      </div>
       <Button>Click me</Button>
 
       <button
