@@ -1,14 +1,11 @@
 "use client";
 
-import {useTheme} from "next-themes";
-
-import {Button} from "@/components/ui/button";
 import NextEvent from "@/components/NextEvent";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import EventItem from "@/components/EventItem";
+import {AddEvent} from "@/components/AddEvent";
 
 export default function Home() {
-  const {theme, setTheme} = useTheme();
   const eventsMock = [
     {
       eventName: "AI don sarasa",
@@ -61,20 +58,23 @@ export default function Home() {
   ];
 
   return (
-    <main className="p-5">
+    <main className="max-w-[1200px] mx-auto mt-5 px-5 xl:px-0">
       <NextEvent />
-      <section className="md:flex">
+      <section className="grid md:flex my-5 gap-5 md:gap-10">
         <aside>
-          <ScrollArea className="h-[200px] md:h-[500px] w-full md:w-[350px] lg:w-[400px] rounded-md border-[3px] border-slate-300 p-4 my-5">
+          <ScrollArea className="h-[200px] md:h-[500px] w-full md:w-[350px] lg:w-[400px] rounded-md border-[3px] border-slate-300 p-4">
             {eventsMock.map((event, index) => (
               <EventItem key={index} {...event} />
             ))}
           </ScrollArea>
         </aside>
+        <article className="w-full">
+          <AddEvent />
+        </article>
 
-        <Button onClick={() => (theme === "dark" ? setTheme("light") : setTheme("dark"))}>
+        {/* <Button onClick={() => (theme === "dark" ? setTheme("light") : setTheme("dark"))}>
           Click me
-        </Button>
+        </Button> */}
       </section>
     </main>
   );
