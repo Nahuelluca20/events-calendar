@@ -58,11 +58,14 @@ export default function Home() {
   ];
 
   return (
-    <main className="mt-5 px-5 xl:px-0">
+    <main>
       <NextEvent />
       <section className="grid md:flex my-5 gap-5 md:gap-10">
         <aside>
-          <ScrollArea className="h-[200px] md:h-[500px] w-full md:w-[350px] lg:w-[400px] rounded-md border-[3px] border-slate-300 p-4">
+          <ScrollArea
+            className="h-[200px] md:h-[500px] w-full md:w-[350px] lg:w-[400px] rounded-md border-[3px] border-slate-300 p-4"
+            type="auto"
+          >
             {eventsMock.map((event, index) => (
               <EventItem key={index} {...event} />
             ))}
@@ -71,10 +74,6 @@ export default function Home() {
         <article className="w-full">
           <AddEvent />
         </article>
-
-        {/* <Button onClick={() => (theme === "dark" ? setTheme("light") : setTheme("dark"))}>
-          Click me
-        </Button> */}
       </section>
     </main>
   );

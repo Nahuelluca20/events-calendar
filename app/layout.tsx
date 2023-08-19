@@ -19,7 +19,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       <body className={inter.className}>
         <ThemeProvider enableSystem attribute="class" defaultTheme="system">
           <Navbar />
-          <div className="max-w-[1200px] mx-auto">{children}</div>
+          <div className="max-w-[1200px] mx-auto px-5 xl:px-0 mt-5">{children}</div>
         </ThemeProvider>
       </body>
     </html>
