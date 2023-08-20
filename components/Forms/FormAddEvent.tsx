@@ -31,6 +31,7 @@ export function FormAddEvent() {
   const {theme} = useTheme();
 
   function onSubmit(data: z.infer<typeof EventFormSchema>) {
+    // console.log(format(data.dateOfEvent, "dd-MM-yyyy"));
     toast({
       title: "You submitted the following values:",
       description: (
