@@ -1,7 +1,9 @@
+import EventsFilter from "@/components/EventsFilter";
+
 export default function page() {
   return (
-    <div>
-      <h1>EVENTs</h1>
-    </div>
+    <section>
+      <EventsFilter />
+    </section>
   );
 }

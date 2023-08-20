@@ -14,3 +14,10 @@ export const EventFormSchema = z.object({
     required_error: "A date of event is required.",
   }),
 });
+
+export type EventsSchema = {
+  eventName: string;
+  dateOfEvent: Date | string;
+  eventDescription: string;
+  topic: string;
+};

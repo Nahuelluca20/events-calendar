@@ -1,12 +1,8 @@
-"use client";
-
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import * as z from "zod";
-import {Popover, PopoverTrigger, PopoverContent} from "@radix-ui/react-popover";
 import {format} from "date-fns";
 import {Calendar as CalendarIcon} from "lucide-react";
-import {useTheme} from "next-themes";
 
 import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
@@ -23,12 +19,12 @@ import {cn} from "@/lib/utils";
 
 import {Input} from "../ui/input";
 import {Calendar} from "../ui/calendar";
+import {Popover, PopoverContent, PopoverTrigger} from "../ui/popover";
 
 export function FormAddEvent() {
   const form = useForm<z.infer<typeof EventFormSchema>>({
     resolver: zodResolver(EventFormSchema),
   });
-  const {theme} = useTheme();
 
   function onSubmit(data: z.infer<typeof EventFormSchema>) {
     // console.log(format(data.dateOfEvent, "dd-MM-yyyy"));
@@ -76,7 +72,7 @@ export function FormAddEvent() {
                   <SelectItem value="devops">DevOps</SelectItem>
                   <SelectItem value="infrastructure">Infrastructure</SelectItem>
                   <SelectItem value="mobile">Mobile</SelectItem>
-                  <SelectItem value="qa">QA/test</SelectItem>
+                  <SelectItem value="qa">Test/QA</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -104,12 +100,7 @@ export function FormAddEvent() {
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent
-                  align="start"
-                  className={`border-slate-300 border-2 rounded-lg w-auto p-0 ${
-                    theme === "dark" ? "bg-[#020817]" : "bg-white"
-                  }`}
-                >
+                <PopoverContent align="start" className="w-auto p-0">
                   <Calendar
                     initialFocus
                     disabled={(date) => date < new Date()}

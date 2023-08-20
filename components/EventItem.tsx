@@ -2,25 +2,30 @@ import {ChevronRight} from "lucide-react";
 
 import {Separator} from "@/components/ui/separator";
 import {Button} from "@/components/ui/button";
+import {getEventTopicColor} from "@/utils/getEventTopic";
+import {EventsSchema} from "@/utils/schemas";
 
-export default function EventItem({
-  eventName,
-  eventDescription,
-}: {
-  eventName: string;
-  eventDescription: string;
-}) {
+export default function EventItem({event}: {event: EventsSchema}) {
+  const color = getEventTopicColor(event.topic);
+
   return (
     <div>
       <div className="flex justify-between items-center pr-2">
         <div className="flex flex-col gap-1">
           <hgroup className="flex gap-2 items-center mb-1">
-            <h4 className="text-sm font-medium leading-none text-accent-foreground">{eventName}</h4>
-            <span className="text-[12px] rounded-xl font-bold text-green-500 leading-none text-accent-foreground border-[2px] border-green-500 py-1 px-2">
-              22-08-2023
+            <h4 className="text-sm font-medium leading-none text-accent-foreground">
+              {event.eventName}
+            </h4>
+            <span
+              className={`text-[12px] rounded-xl font-bold leading-none text-accent-foreground border-[2px] py-1 px-2`}
+              style={{borderColor: `${color}`, color: `${color}`}}
+            >
+              {event.topic.toLocaleLowerCase()}
             </span>
           </hgroup>
-          <span className="text-sm leading-none text-muted-foreground ">{eventDescription}</span>
+          <span className="text-sm leading-none text-muted-foreground">
+            {event.eventDescription} - {event.dateOfEvent.toString()}
+          </span>
         </div>
         <Button size="icon" variant="secondary">
           <ChevronRight className="h-6 w-6" />
