@@ -1,3 +1,4 @@
+import {DateRange} from "react-day-picker";
 import * as z from "zod";
 
 export const EventFormSchema = z.object({
@@ -17,7 +18,7 @@ export const EventFormSchema = z.object({
 
 export type EventsSchema = {
   eventName: string;
-  dateOfEvent: Date | string;
+  dateOfEvent: Date | string | DateRange;
   eventDescription: string;
   topic: string;
 };

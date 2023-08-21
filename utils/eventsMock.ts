@@ -1,6 +1,6 @@
 export const eventsMock = [
   {
-    eventName: "AI don sarasa",
+    eventName: "SARAsa",
     eventDescription: "AI don sarasa en tal lugar",
     dateOfEvent: "22-08-2023",
     topic: "frontend",
@@ -42,10 +42,10 @@ export const eventsMock = [
     topic: "mobile",
   },
   {
-    eventName: "AI don sarasa",
+    eventName: "SARAsa",
     eventDescription: "AI don sarasa en tal lugar",
     dateOfEvent: "22-08-2023",
-    topic: "frontend",
+    topic: "backend",
   },
   {
     eventName: "AI don sarasa",

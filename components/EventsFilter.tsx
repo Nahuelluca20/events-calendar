@@ -1,3 +1,6 @@
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
+import {DateRange} from "react-day-picker";
+
 import {
   Select,
   SelectContent,
@@ -5,24 +8,56 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {EventsSchema} from "@/utils/schemas";
 
 import {DatePickerRange} from "./DatePickerRange";
 import {Input} from "./ui/input";
 import {Label} from "./ui/label";
 import {Button} from "./ui/button";
 
-export default function EventsFilter() {
+export default function EventsFilter({
+  values,
+  setValues,
+}: {
+  values: any;
+  setValues: Dispatch<SetStateAction<EventsSchema>>;
+}) {
+  const [date, setDate] = useState<DateRange | undefined>();
+
+  const filterByEventName = (value: string) => {
+    setValues({...values, eventName: value});
+  };
+
+  const filterByTopic = (value: string) => {
+    setValues({...values, topic: value});
+  };
+
+  const filterByDate = (value: string | DateRange) => {
+    setValues({...values, dateOfEvent: value});
+  };
+
+  useEffect(() => {
+    date && filterByDate(date);
+  }, [date]);
+
   return (
     <div className="grid md:grid-cols-[repeat(2,minmax(100px,250px))] border-[3px] gap-5 px-4 lg:px-10 py-4 lg:flex items-end border-slate-300 rounded-xl">
       <div>
         <Label htmlFor="eventName">Event Name</Label>
-        <Input className="w-[250px] mt-2" placeholder="name" type="text" />
+        <Input
+          className="w-[250px] mt-2"
+          id="eventName"
+          name="eventName"
+          placeholder="name"
+          type="text"
+          onChange={(e) => filterByEventName(e.target.value)}
+        />
       </div>
       <div className="col-span-1">
         <Label htmlFor="topic">Topic</Label>
-        <Select>
+        <Select onValueChange={(e) => filterByTopic(e)}>
           <SelectTrigger className="w-[250px] mt-2">
-            <SelectValue placeholder="Theme" />
+            <SelectValue placeholder="Topic" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="frontend">FrontEnd</SelectItem>
@@ -36,7 +71,7 @@ export default function EventsFilter() {
       </div>
       <div className="md:col-span-2">
         <Label htmlFor="date">Date of Event</Label>
-        <DatePickerRange className="mt-2" />
+        <DatePickerRange className="mt-2" date={date} setDate={setDate} />
       </div>
       <div className="flex-grow flex mt-2 lg:mt-0 lg:justify-end">
         <Button>Search</Button>
