@@ -16,6 +16,7 @@ import {
 import {EventFormSchema} from "@/utils/schemas";
 import {toast} from "@/components/ui/use-toast";
 import {cn} from "@/lib/utils";
+import {eventsMock} from "@/utils/eventsMock";
 
 import {Input} from "../ui/input";
 import {Calendar} from "../ui/calendar";
@@ -27,7 +28,8 @@ export function FormAddEvent() {
   });
 
   function onSubmit(data: z.infer<typeof EventFormSchema>) {
-    // console.log(format(data.dateOfEvent, "dd-MM-yyyy"));
+    console.log(format(data.dateOfEvent, "dd-MM-yyyy"));
+    eventsMock.push(data);
     toast({
       title: "You submitted the following values:",
       description: (
@@ -41,19 +43,34 @@ export function FormAddEvent() {
   return (
     <Form {...form}>
       <form className="w-full space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="eventName"
-          render={({field}) => (
-            <FormItem>
-              <FormLabel>Name of the event</FormLabel>
-              <FormControl>
-                <Input placeholder="Event Name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="lg:flex w-full space-y-3 lg:space-y-0 gap-x-5">
+          <FormField
+            control={form.control}
+            name="eventName"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Name of the event</FormLabel>
+                <FormControl>
+                  <Input placeholder="Event Name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="eventDescription"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Input className="lg:w-[300px]" placeholder="Event Description" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="topic"

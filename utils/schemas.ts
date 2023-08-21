@@ -11,6 +11,12 @@ export const EventFormSchema = z.object({
   topic: z.string({
     required_error: "Please select an topic to display.",
   }),
+  eventDescription: z
+    .string({
+      required_error: "Please write a event description.",
+    })
+    .min(2)
+    .max(50),
   dateOfEvent: z.date({
     required_error: "A date of event is required.",
   }),
