@@ -36,6 +36,16 @@ export default function EventsFilter({
     setValues({...values, dateOfEvent: value});
   };
 
+  const clearFilters = () => {
+    setDate(undefined);
+    setValues({
+      eventName: "",
+      dateOfEvent: {from: undefined, to: undefined},
+      eventDescription: "",
+      topic: "",
+    });
+  };
+
   useEffect(() => {
     date && filterByDate(date);
   }, [date]);
@@ -50,13 +60,14 @@ export default function EventsFilter({
           name="eventName"
           placeholder="name"
           type="text"
+          value={values.eventName}
           onChange={(e) => filterByEventName(e.target.value)}
         />
       </div>
       <div className="col-span-1">
         <Label htmlFor="topic">Topic</Label>
         <Select onValueChange={(e) => filterByTopic(e)}>
-          <SelectTrigger className="w-[250px] mt-2">
+          <SelectTrigger className="w-[250px] mt-2" value={values.topic}>
             <SelectValue placeholder="Topic" />
           </SelectTrigger>
           <SelectContent>
@@ -74,7 +85,7 @@ export default function EventsFilter({
         <DatePickerRange className="mt-2" date={date} setDate={setDate} />
       </div>
       <div className="flex-grow flex mt-2 lg:mt-0 lg:justify-end">
-        <Button>Search</Button>
+        <Button onClick={() => clearFilters()}>Clear</Button>
       </div>
     </div>
   );

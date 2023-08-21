@@ -1,5 +1,6 @@
 "use client";
 import {useState} from "react";
+import {DateRange} from "react-day-picker";
 
 import {EventsSchema} from "@/utils/schemas";
 import {cn} from "@/lib/utils";
@@ -19,7 +20,7 @@ export default function EventsList({
 }) {
   const [filterValues, setFilterValues] = useState<EventsSchema>({
     eventName: "",
-    dateOfEvent: "",
+    dateOfEvent: {from: undefined, to: undefined},
     eventDescription: "",
     topic: "",
   });
@@ -33,12 +34,15 @@ export default function EventsList({
   );
 
   const filteredByDate = filteredByTopic.filter((event) => {
-    if (!filterValues.dateOfEvent.from && !filterValues.dateOfEvent.to) {
+    const dateRange = filterValues.dateOfEvent as DateRange;
+
+    if (!dateRange || !dateRange.from || !dateRange.to) {
       return true;
     }
+
     const eventDate = new Date(event.dateOfEvent.toLocaleString().split("-").reverse().join("-"));
-    const fromDate = new Date(filterValues.dateOfEvent.from);
-    const toDate = new Date(filterValues.dateOfEvent.to);
+    const fromDate = new Date(dateRange.from);
+    const toDate = new Date(dateRange.to);
 
     return eventDate >= fromDate && eventDate <= toDate;
   });
