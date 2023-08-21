@@ -7,7 +7,7 @@ import GitHubButton from "./github-button";
 export const dynamic = "force-dynamic";
 
 export default async function Login() {
-  const supabase = createServerComponentClient<any>({cookies});
+  const supabase = createServerComponentClient<Database>({cookies});
   const {
     data: {session},
   } = await supabase.auth.getSession();

@@ -23,6 +23,8 @@ export const EventFormSchema = z.object({
 });
 
 export type EventsSchema = {
+  id?: number;
+  createdAt?: Date;
   eventName: string;
   dateOfEvent: Date | string | DateRange;
   eventDescription: string;

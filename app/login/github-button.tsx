@@ -5,7 +5,7 @@ import Image from "next/image";
 interface Props {}
 
 const GitHubButton: React.FC<Props> = ({}) => {
-  const supabase = createClientComponentClient<any>();
+  const supabase = createClientComponentClient<Database>();
 
   const handleSignIn = async () => {
     await supabase.auth.signInWithOAuth({

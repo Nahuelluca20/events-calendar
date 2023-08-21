@@ -7,7 +7,7 @@ interface Props {
 }
 
 const AuthButtonClient: React.FC<Props> = ({session}) => {
-  const supabase = createClientComponentClient<any>();
+  const supabase = createClientComponentClient<Database>();
   const router = useRouter();
 
   const handleSignIn = async () => {

@@ -14,7 +14,7 @@ export default function EventsList({
   className,
   withFilters = false,
 }: {
-  events: EventsSchema[];
+  events: EventsSchema[] | null;
   className?: string;
   withFilters?: boolean;
 }) {
@@ -25,15 +25,15 @@ export default function EventsList({
     topic: "",
   });
 
-  const filteredByName = events.filter((event) =>
+  const filteredByName = events?.filter((event) =>
     event.eventName.toLocaleLowerCase().includes(filterValues.eventName.toLocaleLowerCase()),
   );
 
-  const filteredByTopic = filteredByName.filter((event) =>
+  const filteredByTopic = filteredByName?.filter((event) =>
     event.topic.includes(filterValues.topic),
   );
 
-  const filteredByDate = filteredByTopic.filter((event) => {
+  const filteredByDate = filteredByTopic?.filter((event) => {
     const dateRange = filterValues.dateOfEvent as DateRange;
 
     if (!dateRange || !dateRange.from || !dateRange.to) {
@@ -59,9 +59,7 @@ export default function EventsList({
         )}
         type="auto"
       >
-        {filteredEvents.map((event, index) => (
-          <EventItem key={index} event={event} />
-        ))}
+        {filteredEvents?.map((event, index) => <EventItem key={index} event={event} />)}
       </ScrollArea>
     </>
   );
