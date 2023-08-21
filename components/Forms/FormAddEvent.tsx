@@ -16,7 +16,6 @@ import {
 import {EventFormSchema} from "@/utils/schemas";
 import {toast} from "@/components/ui/use-toast";
 import {cn} from "@/lib/utils";
-import {eventsMock} from "@/utils/eventsMock";
 
 import {Input} from "../ui/input";
 import {Calendar} from "../ui/calendar";
