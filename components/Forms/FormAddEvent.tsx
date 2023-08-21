@@ -28,8 +28,7 @@ export function FormAddEvent() {
   });
 
   function onSubmit(data: z.infer<typeof EventFormSchema>) {
-    console.log(format(data.dateOfEvent, "dd-MM-yyyy"));
-    eventsMock.push(data);
+    // console.log(format(data.dateOfEvent, "dd-MM-yyyy"));
     toast({
       title: "You submitted the following values:",
       description: (
