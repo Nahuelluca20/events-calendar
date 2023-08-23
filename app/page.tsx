@@ -9,7 +9,7 @@ import {toast} from "@/components/ui/use-toast";
 import NextEvent from "@/components/NextEvent";
 import {AddEvent} from "@/components/AddEvent";
 import EventsList from "@/components/EventsList";
-import {FormAddEvent} from "@/components/FormAddEvent";
+import {FormAddEvent} from "@/components/Forms/FormAddEvent";
 import {EventFormSchema} from "@/utils/schemas";
 
 export const dynamic = "force-dynamic";
@@ -24,7 +24,7 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const {data} = await supabase.from("events").select();
+  const {data} = await supabase.from("events").select().order("created_at", {ascending: false});
 
   async function onSubmit(data: z.infer<any>) {
     "use server";

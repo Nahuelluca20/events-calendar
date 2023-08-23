@@ -1,6 +1,8 @@
 "use client";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {DateRange} from "react-day-picker";
+import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
+import {useRouter} from "next/navigation";
 
 import {EventsSchema} from "@/utils/schemas";
 import {cn} from "@/lib/utils";
@@ -18,6 +20,30 @@ export default function EventsList({
   className?: string;
   withFilters?: boolean;
 }) {
+  const supabase = createClientComponentClient();
+  const router = useRouter();
+
+  useEffect(() => {
+    const channel = supabase.realtime
+      .channel("events")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "events",
+        },
+        (payload) => {
+          router.refresh();
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [supabase, router]);
+
   const [filterValues, setFilterValues] = useState<EventsSchema>({
     eventName: "",
     dateOfEvent: {from: undefined, to: undefined},

@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form";
 import * as z from "zod";
 import {format} from "date-fns";
 import {Calendar as CalendarIcon} from "lucide-react";
+import {useEffect} from "react";
 
 import {Button} from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
@@ -17,9 +18,9 @@ import {
 import {EventFormSchema} from "@/utils/schemas";
 import {cn} from "@/lib/utils";
 
-import {Input} from "./ui/input";
-import {Calendar} from "./ui/calendar";
-import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
+import {Input} from "../ui/input";
+import {Calendar} from "../ui/calendar";
+import {Popover, PopoverContent, PopoverTrigger} from "../ui/popover";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,17 @@ export function FormAddEvent({onSubmit}: {onSubmit: any}) {
   const form = useForm<z.infer<typeof EventFormSchema>>({
     resolver: zodResolver(EventFormSchema),
   });
+
+  useEffect(() => {
+    if (form.formState.isSubmitSuccessful) {
+      form.reset({
+        eventName: "",
+        eventDescription: "",
+        dateOfEvent: undefined,
+        topic: "",
+      });
+    }
+  }, [form.formState, form.reset]);
 
   return (
     <Form {...form}>
@@ -42,7 +54,7 @@ export function FormAddEvent({onSubmit}: {onSubmit: any}) {
               <FormItem>
                 <FormLabel>Name of the event</FormLabel>
                 <FormControl>
-                  <Input placeholder="Event Name" {...field} />
+                  <Input {...form.register("eventName")} placeholder="Event Name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -55,7 +67,12 @@ export function FormAddEvent({onSubmit}: {onSubmit: any}) {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Input className="lg:w-[300px]" placeholder="Event Description" {...field} />
+                  <Input
+                    className="lg:w-[300px]"
+                    {...form.register("eventDescription")}
+                    placeholder="Event Description"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -71,7 +88,7 @@ export function FormAddEvent({onSubmit}: {onSubmit: any}) {
               <Select defaultValue={field.value} onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select topic" />
+                    <SelectValue placeholder="Select topic" {...form.register("topic")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -95,7 +112,7 @@ export function FormAddEvent({onSubmit}: {onSubmit: any}) {
               <FormLabel>Date of event</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
-                  <FormControl>
+                  <FormControl {...form.register("dateOfEvent")}>
                     <Button
                       className={cn(
                         "w-[240px] pl-3 text-left font-normal",
