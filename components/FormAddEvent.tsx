@@ -1,3 +1,4 @@
+"use client";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import * as z from "zod";
@@ -14,33 +15,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {EventFormSchema} from "@/utils/schemas";
-import {toast} from "@/components/ui/use-toast";
 import {cn} from "@/lib/utils";
 
-import {Input} from "../ui/input";
-import {Calendar} from "../ui/calendar";
-import {Popover, PopoverContent, PopoverTrigger} from "../ui/popover";
+import {Input} from "./ui/input";
+import {Calendar} from "./ui/calendar";
+import {Popover, PopoverContent, PopoverTrigger} from "./ui/popover";
 
-export function FormAddEvent() {
+export const dynamic = "force-dynamic";
+
+export function FormAddEvent({onSubmit}: {onSubmit: any}) {
   const form = useForm<z.infer<typeof EventFormSchema>>({
     resolver: zodResolver(EventFormSchema),
   });
 
-  function onSubmit(data: z.infer<typeof EventFormSchema>) {
-    // console.log(format(data.dateOfEvent, "dd-MM-yyyy"));
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
-
   return (
     <Form {...form}>
-      <form className="w-full space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        className="w-full space-y-6"
+        onSubmit={form.handleSubmit(() => onSubmit(form.getValues()))}
+      >
         <div className="lg:flex w-full space-y-3 lg:space-y-0 gap-x-5">
           <FormField
             control={form.control}
@@ -87,7 +80,7 @@ export function FormAddEvent() {
                   <SelectItem value="devops">DevOps</SelectItem>
                   <SelectItem value="infrastructure">Infrastructure</SelectItem>
                   <SelectItem value="mobile">Mobile</SelectItem>
-                  <SelectItem value="qa">Test/QA</SelectItem>
+                  <SelectItem value="test">Test/QA</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

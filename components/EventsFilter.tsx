@@ -76,7 +76,7 @@ export default function EventsFilter({
             <SelectItem value="devops">DevOps</SelectItem>
             <SelectItem value="infrastructure">Infrastructure</SelectItem>
             <SelectItem value="mobile">Mobile</SelectItem>
-            <SelectItem value="qa">Test/QA</SelectItem>
+            <SelectItem value="test">Test/QA</SelectItem>
           </SelectContent>
         </Select>
       </div>
