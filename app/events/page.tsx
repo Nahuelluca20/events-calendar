@@ -22,6 +22,7 @@ export default async function page() {
   const events =
     data &&
     data.map((event) => ({
+      id: event.id,
       eventName: event.event_name,
       dateOfEvent: format(parseISO(event.date_event), "dd-MM-yyyy"),
       eventDescription: event.event_description,

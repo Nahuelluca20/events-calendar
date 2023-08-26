@@ -10,7 +10,6 @@ import NextEvent from "@/components/NextEvent";
 import {AddEvent} from "@/components/AddEvent";
 import EventsList from "@/components/EventsList";
 import {FormAddEvent} from "@/components/Forms/FormAddEvent";
-import {EventFormSchema} from "@/utils/schemas";
 
 export const dynamic = "force-dynamic";
 
@@ -50,6 +49,7 @@ export default async function Home() {
   const events =
     data &&
     data.map((event) => ({
+      id: event.id,
       eventName: event.event_name,
       dateOfEvent: format(parseISO(event.date_event), "dd-MM-yyyy"),
       eventDescription: event.event_description,

@@ -36,9 +36,6 @@ export function Navbar() {
           </NavigationMenuItem>
         </NavigationMenuList>
         <NavigationMenuList>
-          <NavigationMenuItem>
-            <Input className="border-2" placeholder="search" />
-          </NavigationMenuItem>
           <NavigationMenuItem className="pl-2">
             <Button
               size="icon"

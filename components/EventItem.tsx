@@ -1,4 +1,5 @@
 import {ChevronRight} from "lucide-react";
+import Link from "next/link";
 
 import {Separator} from "@/components/ui/separator";
 import {Button} from "@/components/ui/button";
@@ -27,9 +28,11 @@ export default function EventItem({event}: {event: EventsSchema}) {
             {event.eventDescription} - {event.dateOfEvent.toString()}
           </span>
         </div>
-        <Button size="icon" variant="secondary">
-          <ChevronRight className="h-6 w-6" />
-        </Button>
+        <Link href={`/events/${event.id}`}>
+          <Button size="icon" variant="secondary">
+            <ChevronRight className="h-6 w-6" />
+          </Button>
+        </Link>
       </div>
 
       <Separator className="mt-2 mb-5 border-slate-300 border-[1.5px]" />
