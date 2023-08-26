@@ -29,11 +29,6 @@ export function Navbar() {
               events
             </Link>
           </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link legacyBehavior passHref href="/calendar">
-              calendar
-            </Link>
-          </NavigationMenuItem>
         </NavigationMenuList>
         <NavigationMenuList>
           <NavigationMenuItem className="pl-2">
