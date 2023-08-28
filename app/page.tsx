@@ -23,7 +23,7 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const {data} = await supabase.from("events").select().order("created_at", {ascending: false});
+  const {data} = await supabase.from("events").select().order("date_event", {ascending: true});
 
   async function onSubmit(data: z.infer<any>) {
     "use server";
@@ -58,7 +58,7 @@ export default async function Home() {
 
   return (
     <main>
-      <NextEvent />
+      {events && <NextEvent event={events[0]} />}
       <section className="grid md:flex my-5 gap-5 md:gap-10">
         <aside>
           <EventsList events={events} />
